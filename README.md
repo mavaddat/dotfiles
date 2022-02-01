@@ -1,11 +1,13 @@
-# Paul's dotfiles
+# Mav's dotfiles
 
-* I maintain this repo as *my* dotfiles, but I'm keenly aware people are using it for theirs.
-* You're quite welcome to make suggestions, however I may decline if it's not of personal value to me.
-* If you're starting off anew, consider forking [mathias](https://github.com/mathiasbynens/dotfiles/) or [alrra](https://github.com/alrra/dotfiles/). [paulmillr](https://github.com/paulmillr/dotfiles) and [gf3](https://github.com/gf3/dotfiles) also have great setups
+* I maintain this repo as my dotfiles, forked from the repo of @paulirish [here](https://github.com/paulirish/dotfiles).
+* If you're starting off anew, Paul recommends forking [mathias](https://github.com/mathiasbynens/dotfiles/) or [alrra](https://github.com/alrra/dotfiles/). He suggests looking at [paulmillr](https://github.com/paulmillr/dotfiles) and [gf3](https://github.com/gf3/dotfiles) also.
 
 ## Setup
-#### installing & using
+
+Here are steps to get these profiles into your Linux environment:
+
+### Installing & Using
 
 * fork this to your own acct
 * clone that repo
@@ -14,23 +16,23 @@
   * git config needs attention, read the notes.
 * use it. yay!
 
-#### maintenance
+#### Maintenance
 
 * commit/push changes you want.
 * you can also hypothetically cherry-pick commits from me and mathias and our fork ecosystem.
 
-#### shell
+#### Shell
 
 This repo contains config for bash, zsh, and fish. As of March 2016, I'm using fish shell mostly, but fall back to bash once in a while. The bash and fish stuff are both well maintained; zsh, less so. If you're using fish you'll want to do a `git submodule update --init`.
 
-
-## my favorite parts.
+## Paul's favs
 
 ### [`.aliases`](https://github.com/paulirish/dotfiles/blob/master/.aliases) and [`.functions`](https://github.com/paulirish/dotfiles/blob/master/.functions)
 
 So many goodies.
 
 ### The "readline config" (`.inputrc`)
+
 Basically it makes typing into the prompt amazing.
 
 * tab like crazy for autocompletion that doesnt suck. tab all the things. srsly.
@@ -39,10 +41,10 @@ Basically it makes typing into the prompt amazing.
 * case insensitivity.
 * tab all the livelong day.
 
-
-
 ### Moving around in folders (`z`, `...`, `cdf`)
-`z` helps you jump around to whatever folder. It uses actual real magic to determine where you should jump to. Seperately there's some `...` aliases to shorten `cd ../..` and `..`, `....` etc. Then, if you have a folder open in Finder, `cdf` will bring you to it.
+
+`z` helps you jump around to whatever folder. It uses actual real magic to determine where you should jump to. Separately, there's some `...` aliases to shorten `cd ../..` and `..`, `....` etc. Then, if you have a folder open in Finder, `cdf` will bring you to it.
+
 ```sh
 z dotfiles
 z blog
@@ -50,18 +52,19 @@ z blog
 z public
 cdf       # cd to whatever's up in Finder
 ```
+
 `z` learns only once its installed so you'll have to cd around for a bit to get it taught.
 Lastly, I use `open .` to open Finder from this path. (That's just available normally.)
 
+## Overview of Files
 
+#### Automatic Configuration
 
-## overview of files
-
-####  Automatic config
 * `.vimrc`, `.vim` - vim config, obv.
 * `.inputrc` - behavior of the actual prompt line
 
-#### shell environment
+#### Shell Environment
+
 * `.aliases`
 * `.bash_profile`
 * `.bash_prompt`
@@ -70,18 +73,19 @@ Lastly, I use `open .` to open Finder from this path. (That's just available nor
 * `.functions`
 * `.extra` - not included, explained below
 
-#### manual run
+#### Manual Run
+
 * `setup-a-new-machine.sh` - random apps i need installed
 * `symlink-setup.sh`  - sets up symlinks for all dotfiles and vim config.
 * `.macos` - run on a fresh mac os setup
 * `brew.sh` & `brew-cask.sh` - homebrew initialization
 
-#### git, brah
+#### git, bruh
+
 * `.git`
 * `.gitattributes`
 * `.gitconfig`
 * `.gitignore`
-
 
 ### `.extra` for your private configuration
 
@@ -105,7 +109,6 @@ PATH=$PATH:~/code/git-friendly
 export PATH
 ```
 
-
 ### Sensible OS X defaults
 
 Mathias's repo is the canonical for this, but you should probably run his or mine after reviewing it.
@@ -124,13 +127,13 @@ If you edit this stuff, install [Dotfiles Syntax Highlighting](https://github.co
 
 ### 2020 update
 
-Rust folks have made a few things that are changing things.
+Rust folks have made waves in which we rudder our boats.
 
- - most folks know `bat`  as a `cat` replacement
- - https://github.com/dandavison/delta seems a lot better than the diff-so-fancy project that i started. :/
- - https://github.com/ogham/exa is better `ls` and gets all the trapd00r/LS_COLORS stuff etc.
- - https://github.com/bigH/git-fuzzy interactive git thing. deprecates my `git recent` script. and probably some other things.
+* As most know, `bat`  as a `cat` replacement (🦇 vs 😼)
+* <https://github.com/dandavison/delta> may be better than the diff-so-fancy project Paul started
+* <https://github.com/ogham/exa> is better `ls` and gets all the trapd00r/LS_COLORS stuff, etc.
+* <https://github.com/bigH/git-fuzzy> interactive git thing. This deprecates Paul's `git recent` script&hellip; and probably some other things.
 
- Also I'd like to migrate to using homesick or https://www.atlassian.com/git/tutorials/dotfiles
+ Also, I'd like to migrate to using homesick or <https://www.atlassian.com/git/tutorials/dotfiles>
 
- also interested in https://github.com/dandavison/open-in-editor
+ Also interested in <https://github.com/dandavison/open-in-editor>
