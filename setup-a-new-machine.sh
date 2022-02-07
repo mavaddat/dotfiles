@@ -79,6 +79,13 @@ cp -Rp ~/Pictures ~/migration
 ### end of old machine backup
 ##############################################################################################################
 
+sed -i '' "s/paulirish-macbookair2/${hostname}/g" "./fish/config.fish"
+
+# Replace the string 'paulirish' with current username in all the files below
+
+for file in ".aliases", ".bash_prompt", ".functions", ".gitmodules", "brew.sh", "setup-a-new-machine.sh", "docs/common-things.sh", "fish/chromium.fish", "fish/config.fish", "fish/functions.fish", "fish/path.fish", "fish/completions/yo.fish", "fish/functions/fzf_key_bindings.fish", "prefs/com.googlecode.iterm2.plist"; do
+  sed -i '' "s/paulirish/${whoami}/g" $file
+done
 
 
 ##############################################################################################################
