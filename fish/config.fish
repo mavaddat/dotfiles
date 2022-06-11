@@ -4,7 +4,6 @@ set default_machine "paulirish-macbookair2"
 
 source ~/.config/fish/path.fish
 source ~/.config/fish/aliases.fish
-source ~/.config/fish/chpwd.fish
 source ~/.config/fish/functions.fish
 source ~/.config/fish/chromium.fish
 # source ~/.config/fish/conf.d/scmpuff.fish
@@ -15,26 +14,13 @@ if test -e "$HOME/.extra.fish";
 end
 
 # THEME PURE #
+set -g async_prompt_functions _pure_prompt_git
 set fish_function_path $HOME/.config/fish/functions/pure/functions/ $fish_function_path
 set fish_function_path $HOME/.config/fish/functions/pure/ $fish_function_path
 source $HOME/.config/fish/functions/pure/conf.d/pure.fish
 
-export GOPATH=$HOME/.go/
-
-# Completions
-function make_completion --argument-names alias command
-    echo "
-    function __alias_completion_$alias
-        set -l cmd (commandline -o)
-        set -e cmd[1]
-        complete -C\"$command \$cmd\"
-    end
-    " | .
-    complete -c $alias -a "(__alias_completion_$alias)"
-end
-
-make_completion g 'git'
-
+# I don't need a prompt symbol for you-got-things-in-yr-stash
+set --erase pure_symbol_git_stash
 
 # Readline colors
 set -g fish_color_autosuggestion 555 yellow
@@ -108,9 +94,9 @@ set -gx LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 [ -f /Users/paulirish/.config/yarn/global/node_modules/tabtab/.completions/yarn.fish ]; and . /Users/paulirish/.config/yarn/global/node_modules/tabtab/.completions/yarn.fish
 
 
- # fzf should be populated via the silver searcher: https://github.com/junegunn/fzf#respecting-gitignore
+ # fzf should be populated via the silver searcher (to respect gitignore and be faster): https://github.com/junegunn/fzf#respecting-gitignore
  # note.. without `ag` this is a good fallback: set -gx FZF_DEFAULT_COMMAND 'fd --type f'
-set -gx FZF_DEFAULT_COMMAND 'command ag -l -g ""'
+set -gx FZF_DEFAULT_COMMAND 'command ag --files-with-matches --filename-pattern ""'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
 

@@ -7,7 +7,6 @@ function ....  ; cd ../../.. ; end
 function ..... ; cd ../../../.. ; end
 
 # Utilities
-function g        ; git $argv ; end
 function grep     ; command grep --color=auto $argv ; end
 
 # uses npm if its an npm repo. https://www.npmjs.com/package/narn
@@ -15,6 +14,9 @@ alias yarn=narn
 
 alias li=lighthouse
 alias lperf 'lighthouse --only-categories=performance'
+alias comp 'node build/build-report-components.js && yarn eslint --fix report/renderer/components.js'
+alias reportunit 'yarn jest (find report -iname "*-test.js" | grep -v axe)'
+alias reportwatch 'find report lighthouse-core/test/results/sample_v2.json | entr bash -c "node build/build-report-components.js && node build/build-report.js --psi && node build/build-sample-reports.js && echo \$(date) && yarn eslint --fix report/renderer/components.js" && bash lighthouse-core/scripts/copy-util-commonjs.sh'
 
 # mv, rm, cp
 alias mv 'command gmv --interactive --verbose'
@@ -25,10 +27,14 @@ alias chmox='chmod +x'
 
 alias where=which # sometimes i forget
 
-# typos
-abbr bwre brew
+# typos and abbreviations
+abbr g git
+abbr gi git
 abbr gti git
 abbr yearn yarn
+abbr v vim
+abbr bwre brew
+
 
 alias hosts='sudo $EDITOR /etc/hosts'   # yes I occasionally 127.0.0.1 twitter.com ;)
 
@@ -39,7 +45,9 @@ alias ag='ag --follow --hidden -W (math $COLUMNS - 11)'
 alias diskspace_report="df -P -kHl"
 alias free_diskspace_report="diskspace_report"
 
-alias main="git checkout main ^ /dev/null || git checkout master"
+# is it a `main` or a `master` repo?
+alias gitmainormaster="git branch --format '%(refname:short)' --sort=-committerdate --list master main | head -n1"
+alias main="git checkout (gitmainormaster)"
 alias master="main"
 
 alias resetmouse='printf '"'"'\e[?1000l'"'"
@@ -54,10 +62,6 @@ alias wget="curl -O"
 # Recursively delete `.DS_Store` files
 alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
-# Shortcuts
-alias g="git"
-alias gi="git"
-alias v="vim"
 alias ungz="gunzip -k"
 
 # File size

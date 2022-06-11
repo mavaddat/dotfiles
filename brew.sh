@@ -50,7 +50,6 @@ brew install entr
 brew install gh
 # nicer git diffs
 brew install git-delta
-brew install git
 
 # better `top`
 brew install glances
@@ -62,7 +61,7 @@ brew install shellcheck # linting for .sh files
 brew install mtr
 
     # allow mtr to run without sudo
-    mtrlocation=$(brew info mtr | grep Cellar | sed -e 's/ (.*//') #  e.g. `/Users/paulirish/.homebrew/Cellar/mtr/0.86`
+    mtrlocation=$(brew info mtr | grep Cellar | sed -e 's/ (.*//') #  e.g. `/Users/paulirish/homebrew/Cellar/mtr/0.86`
     sudo chmod 4755 $mtrlocation/sbin/mtr
     sudo chown root $mtrlocation/sbin/mtr
 

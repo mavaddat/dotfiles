@@ -92,6 +92,8 @@ done
 ### XCode Command Line Tools
 #      thx https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
 
+# !!! doesnt work, need to update this section..
+
 if ! xcode-select --print-path &> /dev/null; then
 
     # Prompt user to install the XCode Command Line Tools
@@ -187,25 +189,16 @@ curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
 git clone https://github.com/thebitguru/play-button-itunes-patch ~/code/play-button-itunes-patch
 
 
-# my magic photobooth symlink -> dropbox. I love it.
-# 	 + first move Photo Booth folder out of Pictures
-# 	 + then start Photo Booth. It'll ask where to put the library.
-# 	 + put it in Dropbox/public
-# 	* Now… you can record photobooth videos quickly and they upload to dropbox DURING RECORDING
-# 	* then you grab public URL and send off your video message in a heartbeat.
-
-
-# for the c alias (syntax highlighted cat)
-sudo easy_install Pygments
-
 
 # change to bash 4 (installed by homebrew)
 BASHPATH=$(brew --prefix)/bin/bash
-#sudo echo $BASHPATH >> /etc/shells
-sudo bash -c 'echo $(brew --prefix)/bin/bash >> /etc/shells'
+sudo bash -c "echo $BASHPATH >> /etc/shells"
 chsh -s $BASHPATH # will set for current user only.
 echo $BASH_VERSION # should be 4.x not the old 3.2.X
+# repeat for fish, zsh
 # Later, confirm iterm settings aren't conflicting.
+
+
 
 
 # iterm with more margin! http://hackr.it/articles/prettier-gutter-in-iterm-2/
@@ -227,37 +220,23 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
 # improve perf of git inside of chromium checkout
 
-# read https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md
-
-# default is (257*1024)
-sudo sysctl kern.maxvnodes=$((512*1024))
-echo kern.maxvnodes=$((512*1024)) | sudo tee -a /etc/sysctl.conf
-
-# https://facebook.github.io/watchman/docs/install.html#mac-os-file-descriptor-limits
-sudo sysctl -w kern.maxfiles=$((10*1024*1024))
-sudo sysctl -w kern.maxfilesperproc=$((1024*1024))
-echo kern.maxfiles=$((10*1024*1024)) | sudo tee -a /etc/sysctl.conf
-echo kern.maxfilesperproc=$((1024*1024)) | sudo tee -a /etc/sysctl.conf
-
-# also it looks like there's still a session limit thx to ulimit.
-# this sets file descriptor max (per shell session above 256). (see `man ulimit`)
-ulimit -n 98304 # same as ulimit -n $((1024*1024))
-# see https://gist.github.com/tombigel/d503800a282fcadbee14b537735d202c for how this will stick around.......
-
+# Read https://chromium.googlesource.com/chromium/src/+/HEAD/docs/mac_build_instructions.md#improving-performance-of
+# => Do the maxvnodes stuff.
+sudo sysctl kern.maxvnodes=… blah blah something…
+# Also, I used to have some kern.maxfiles(perproc) tweaks here too, but I'm not convinced they're a win for git performance
+#   (FB's watchman doesn't recommend them now that it uses some fsevents API.)
 
 # speed up git status (to run only in chromium repo)
 git config status.showuntrackedfiles no
+git config core.untrackedCache true
 git update-index --untracked-cache
-
-# faster git server communication.
-# like a LOT faster. https://opensource.googleblog.com/2018/05/introducing-git-protocol-version-2.html
-git config protocol.version 2
+# also this unrelated thing
+git config user.email "xxxx@chromium.org"
 
 # see also "A Chromium Compiling Setup for DevTools Hackers"
 # https://gist.github.com/paulirish/2d84a6db1b41b4020685
 
-# also this unrelated thing
-# git config user.email "xxxx@chromium.org"
+
 
 
 ##############################################################################################################
